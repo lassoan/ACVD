@@ -41,6 +41,7 @@
 #include <vtkOBJReader.h>
 #include <vtkSTLReader.h>
 #include <vtkMeshQuality.h>
+#include <vtkVersion.h>
 
 #include "vtkSurface.h"
 #include "vtkOFFReader.h"
@@ -99,8 +100,13 @@ vtkSurface *vtkSurface::GetBiggestConnectedComponents( int numberOfComponents )
 	}
 
 	int NumCells=this->GetNumberOfCells();
-	vtkIdType *pts, npts;
+	vtkIdType npts;
 	vtkIdType NewVertices[1000];
+#if VTK_MAJOR_VERSION >= 9 || (VTK_MAJOR_VERSION >= 8 && VTK_MINOR_VERSION >= 90)
+	const vtkIdType* pts;
+#else
+	vtkIdType* pts;
+#endif
 
 	for (vtkIdType i=0;i<NumCells;i++)
 	{

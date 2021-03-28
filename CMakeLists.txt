@@ -76,6 +76,8 @@ find_package(VTK REQUIRED COMPONENTS
             FiltersGeneral
             metaio
             ImagingGeneral
+            FiltersVerdict
+            InteractionImage
 )
 endif()
 
